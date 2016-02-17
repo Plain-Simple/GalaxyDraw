@@ -12,7 +12,8 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        BufferedImage test_image = DrawSpace.drawSpace(1280, 800, 5, 255, 5);
+        DrawSpace drawSpace = new DrawSpace();
+        BufferedImage test_image = drawSpace.drawSpace(1280, 800);
         try {
             File saved = new File("SpaceTest.png");
             ImageIO.write(test_image, "png", saved);
