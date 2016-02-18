@@ -19,6 +19,8 @@ public class DrawSpace {
     private int brightness;
     // radius of stars, in px
     private int starSize;
+    // random variance from given values
+    private double variance;
     // used for random number generation
     private Random random;
 
@@ -56,8 +58,9 @@ public class DrawSpace {
     // init with default values
     public DrawSpace() {
         density = 5;
-        brightness = 150;
+        brightness = 200;
         starSize = 3;
+        variance = 0.4;
         starColor = Color.WHITE;
         backgroundColor = Color.BLACK;
         random = new Random();
@@ -78,7 +81,8 @@ public class DrawSpace {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         int num_stars = (int) (canvas.getWidth() * canvas.getHeight() / 2500.0 * density);
         for (int i = 0; i < num_stars; i++) {
-            drawStar(graphics, random.nextInt(canvas.getWidth()), random.nextInt(canvas.getHeight()), brightness, starSize);
+            drawStar(graphics, random.nextInt(canvas.getWidth()), random.nextInt(canvas.getHeight()),
+                    varyBrightness(brightness, variance), starSize);
         }
     }
 
@@ -91,5 +95,14 @@ public class DrawSpace {
         graphics.setColor(starColor);
         graphics.setColor(new Color(starColor.getRed(), starColor.getBlue(), starColor.getGreen(), brightness));
         graphics.fillOval(x, y, size, size);
+    }
+
+    private int varyBrightness(int value, double variance) {
+        int varied = value + random.nextInt((int) (value * variance * 100)) / 100;
+        if (varied > 255) {
+            return 255;
+        } else {
+            return varied;
+        }
     }
 }
