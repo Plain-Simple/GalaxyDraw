@@ -16,7 +16,7 @@ public class DrawSpace {
     // whether or not to use gradient
     private boolean useGradient;
     // gradient to use, if backgroundGradient = true
-    private LinearGradientPaint backgroundGradient;
+    private GradientPaint backgroundGradient;
     // stars per 2500 px (50*50 square)
     private double density;
     // alpha value used when drawing stars
@@ -31,48 +31,63 @@ public class DrawSpace {
     public Color getStarColor() {
         return starColor;
     }
+
     public void setStarColor(Color starColor) {
         this.starColor = starColor;
     }
+
     public Color getBackgroundColor() {
         return backgroundColor;
     }
+
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
+
     public double getDensity() {
         return density;
     }
+
     public void setDensity(double density) {
         this.density = density;
     }
+
     public int getBrightness() {
         return brightness;
     }
+
     public void setBrightness(int brightness) {
         this.brightness = brightness;
     }
+
     public int getStarSize() {
         return starSize;
     }
+
     public void setStarSize(int starSize) {
         this.starSize = starSize;
     }
+
     public boolean usesGradient() {
         return useGradient;
     }
+
     public void setUseGradient(boolean useGradient) {
         this.useGradient = useGradient;
     }
-    public LinearGradientPaint getBackgroundGradient() {
+
+    public GradientPaint getBackgroundGradient() {
         return backgroundGradient;
     }
-    public void setBackgroundGradient(LinearGradientPaint backgroundGradient) {
+
+    public void setBackgroundGradient(GradientPaint backgroundGradient) {
         this.backgroundGradient = backgroundGradient;
     }
+
     public double getVariance() {
         return variance;
     }
+
     public void setVariance(double variance) {
         this.variance = variance;
     }
@@ -85,7 +100,7 @@ public class DrawSpace {
         variance = 0.4;
         starColor = new Color(255, 255, 238);
         backgroundColor = Color.BLACK;
-        useGradient = false;
+        useGradient = true;
         random = new Random();
     }
 
@@ -99,7 +114,7 @@ public class DrawSpace {
     // renders space on given BufferedImage
     public void drawSpace(BufferedImage canvas) {
         Graphics2D graphics = canvas.createGraphics();
-        drawBackground(graphics, canvas.getWidth(), canvas.getHeight(), backgroundColor);
+        drawBackground(graphics, canvas.getWidth(), canvas.getHeight());
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         int num_stars = (int) (canvas.getWidth() * canvas.getHeight() / 2500.0 * density);
@@ -109,9 +124,16 @@ public class DrawSpace {
         }
     }
 
-    private static void drawBackground(Graphics2D graphics, int imgWidth, int imgHeight, Color backgroundColor) {
-        graphics.setColor(backgroundColor);
-        graphics.fillRect(0, 0, imgWidth, imgHeight);
+    private void drawBackground(Graphics2D graphics, int imgWidth, int imgHeight) {
+        if (useGradient) {
+            Color endColor = new Color(120, 120, 120);
+            backgroundGradient = new GradientPaint(0, 0, Color.BLACK, imgWidth / 2, imgHeight * 3 / 4, endColor);
+            graphics.setPaint(backgroundGradient);
+            graphics.fillRect(0, 0, imgWidth, imgHeight);
+        } else {
+            graphics.setColor(backgroundColor);
+            graphics.fillRect(0, 0, imgWidth, imgHeight);
+        }
     }
 
     private void drawStar(Graphics2D graphics, int x, int y, int brightness, int size) {
