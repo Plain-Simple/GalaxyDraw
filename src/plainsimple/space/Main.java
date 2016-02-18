@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         DrawSpace drawSpace = new DrawSpace();
         drawSpace.setUseGradient(true);
-        drawSpace.setBackgroundGradient(new GradientPaint(0, 0, Color.BLACK, 1000, 0, new Color(100, 100, 100)));
+        drawSpace.setBackgroundGradient(new GradientPaint(0, 0, new Color(8, 80, 120), 1280, 800, new Color(81, 160, 170)));
         BufferedImage test_image = drawSpace.drawSpace(1280, 800);
         try {
             File saved = new File("SpaceTest.png");
