@@ -13,6 +13,10 @@ public class DrawSpace {
     private Color starColor;
     // color of background
     private Color backgroundColor;
+    // whether or not to use gradient
+    private boolean useGradient;
+    // gradient to use, if backgroundGradient = true
+    private LinearGradientPaint backgroundGradient;
     // stars per 2500 px (50*50 square)
     private double density;
     // alpha value used when drawing stars
@@ -54,6 +58,24 @@ public class DrawSpace {
     public void setStarSize(int starSize) {
         this.starSize = starSize;
     }
+    public boolean usesGradient() {
+        return useGradient;
+    }
+    public void setUseGradient(boolean useGradient) {
+        this.useGradient = useGradient;
+    }
+    public LinearGradientPaint getBackgroundGradient() {
+        return backgroundGradient;
+    }
+    public void setBackgroundGradient(LinearGradientPaint backgroundGradient) {
+        this.backgroundGradient = backgroundGradient;
+    }
+    public double getVariance() {
+        return variance;
+    }
+    public void setVariance(double variance) {
+        this.variance = variance;
+    }
 
     // init with default values
     public DrawSpace() {
@@ -61,8 +83,9 @@ public class DrawSpace {
         brightness = 150;
         starSize = 3;
         variance = 0.4;
-        starColor = Color.WHITE;
+        starColor = new Color(255, 255, 238);
         backgroundColor = Color.BLACK;
+        useGradient = false;
         random = new Random();
     }
 
