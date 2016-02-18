@@ -10,9 +10,9 @@ import java.util.Random;
 public class DrawSpace {
 
     // color of stars
-    private Color starColor = Color.WHITE;
+    private Color starColor;
     // color of background
-    private Color backgroundColor = Color.BLACK;
+    private Color backgroundColor;
     // stars per 2500 px (50*50 square)
     private double density;
     // alpha value used when drawing stars
@@ -58,20 +58,28 @@ public class DrawSpace {
         density = 5;
         brightness = 150;
         starSize = 3;
+        starColor = Color.WHITE;
+        backgroundColor = Color.BLACK;
         random = new Random();
     }
 
+    // creates BufferedImage of given dimensions and renders space on it
     public BufferedImage drawSpace(int imgWidth, int imgHeight) {
         BufferedImage generated = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D graphics = generated.createGraphics();
-        drawBackground(graphics, imgWidth, imgHeight, backgroundColor);
+        drawSpace(generated);
+        return generated;
+    }
+
+    // renders space on given BufferedImage
+    public void drawSpace(BufferedImage canvas) {
+        Graphics2D graphics = canvas.createGraphics();
+        drawBackground(graphics, canvas.getWidth(), canvas.getHeight(), backgroundColor);
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        int num_stars = (int) (imgWidth * imgHeight / 2500.0 * density);
+        int num_stars = (int) (canvas.getWidth() * canvas.getHeight() / 2500.0 * density);
         for (int i = 0; i < num_stars; i++) {
-            drawStar(graphics, random.nextInt(imgWidth), random.nextInt(imgHeight), brightness, starSize);
+            drawStar(graphics, random.nextInt(canvas.getWidth()), random.nextInt(canvas.getHeight()), brightness, starSize);
         }
-        return generated;
     }
 
     private static void drawBackground(Graphics2D graphics, int imgWidth, int imgHeight, Color backgroundColor) {

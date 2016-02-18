@@ -13,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         DrawSpace drawSpace = new DrawSpace();
+        drawSpace.setStarColor(Color.BLUE);
         BufferedImage test_image = drawSpace.drawSpace(1280, 800);
         try {
             File saved = new File("SpaceTest.png");
