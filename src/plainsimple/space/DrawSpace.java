@@ -100,7 +100,7 @@ public class DrawSpace {
         variance = 0.4;
         starColor = new Color(255, 255, 238);
         backgroundColor = Color.BLACK;
-        useGradient = true;
+        useGradient = false;
         random = new Random();
     }
 
@@ -126,8 +126,6 @@ public class DrawSpace {
 
     private void drawBackground(Graphics2D graphics, int imgWidth, int imgHeight) {
         if (useGradient) {
-            Color endColor = new Color(120, 120, 120);
-            backgroundGradient = new GradientPaint(0, 0, Color.BLACK, imgWidth / 2, imgHeight * 3 / 4, endColor);
             graphics.setPaint(backgroundGradient);
             graphics.fillRect(0, 0, imgWidth, imgHeight);
         } else {
