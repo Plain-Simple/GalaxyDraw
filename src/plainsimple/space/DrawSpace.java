@@ -58,7 +58,7 @@ public class DrawSpace {
     // init with default values
     public DrawSpace() {
         density = 5;
-        brightness = 200;
+        brightness = 150;
         starSize = 3;
         variance = 0.4;
         starColor = Color.WHITE;
@@ -82,7 +82,7 @@ public class DrawSpace {
         int num_stars = (int) (canvas.getWidth() * canvas.getHeight() / 2500.0 * density);
         for (int i = 0; i < num_stars; i++) {
             drawStar(graphics, random.nextInt(canvas.getWidth()), random.nextInt(canvas.getHeight()),
-                    varyBrightness(brightness, variance), starSize);
+                    varyBrightness(brightness, variance), varySize(starSize, variance));
         }
     }
 
@@ -104,5 +104,9 @@ public class DrawSpace {
         } else {
             return varied;
         }
+    }
+
+    private int varySize(int value, double variance) {
+        return value + random.nextInt((int) (value * variance * 100)) / 100;
     }
 }
