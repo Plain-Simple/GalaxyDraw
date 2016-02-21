@@ -5,7 +5,10 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * Draws space.
+ * Renders an image of a starry sky based on several parameters.
+ * Copyright(C) Plain Simple Apps 2015
+ * See github.com/Plain-Simple/GalaxyDraw for more information.
+ * Licensed under GPL GNU Version 3 (see license.txt)
  */
 public class DrawSpace {
 
