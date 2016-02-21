@@ -170,4 +170,3 @@ public class DrawSpace {
         return value + random.nextInt((int) (value * variance * 100)) / 100;
     }
 }
-
