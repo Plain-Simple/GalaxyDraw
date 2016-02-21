@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Test Class
+ * Class for testing DrawSpace
  */
-public class Main {
+public class TestClass {
 
     public static void main(String[] args) {
         DrawSpace drawSpace = new DrawSpace();
