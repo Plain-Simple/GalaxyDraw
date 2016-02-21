@@ -1,5 +1,5 @@
 # Space
-Generates a Space Background
+A library for rendering images of space in Java and Android. Licensed under GNU GPL v.3
 
 Some Recommended Gradients:
 - new GradientPaint(0, 0, Color.BLACK, imgWidth / 2, imgHeight, new Color(120, 120, 120));
