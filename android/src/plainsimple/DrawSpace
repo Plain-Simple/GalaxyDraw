@@ -5,7 +5,7 @@ import android.graphics.*;
 import java.util.Random;
 
 /**
- * Created by Stefan on 2/19/2016.
+ * Draws Space.
  */
 public class DrawSpace {
 
@@ -23,6 +23,8 @@ public class DrawSpace {
     private int brightness;
     // radius of stars, in px
     private int starSize;
+    // whether or not to use anti-alias when drawing stars
+    private boolean antiAlias;
     // random variance from given values
     private double variance;
     // used for random number generation
@@ -70,6 +72,14 @@ public class DrawSpace {
         this.starSize = starSize;
     }
 
+    public boolean isAntiAliased() {
+        return antiAlias;
+    }
+
+    public void setAntiAlias(boolean antiAlias) {
+        this.antiAlias = antiAlias;
+    }
+
     public boolean usesGradient() {
         return useGradient;
     }
@@ -100,9 +110,9 @@ public class DrawSpace {
         brightness = 150;
         starSize = 3;
         variance = 0.4;
-        //starColor = Color.rgb(255, 255, 238);
-        starColor = Color.WHITE;
+        starColor = Color.rgb(255, 255, 238);
         backgroundColor = Color.BLACK;
+        antiAlias = true;
         useGradient = false;
         random = new Random();
         paint = new Paint();
@@ -124,7 +134,7 @@ public class DrawSpace {
     public void drawSpace(Canvas canvas) {
         drawBackground(canvas, canvas.getWidth(), canvas.getHeight());
         paint = new Paint();
-        paint.setAntiAlias(true);
+        paint.setAntiAlias(antiAlias);
         int num_stars = (int) (canvas.getWidth() * canvas.getHeight() / 2500.0 * density);
         for (int i = 0; i < num_stars; i++) {
             drawStar(canvas, random.nextInt(canvas.getWidth()), random.nextInt(canvas.getHeight()),
@@ -143,7 +153,7 @@ public class DrawSpace {
     }
 
     private void drawStar(Canvas canvas, int x, int y, int brightness, int size) {
-        paint.setColor(Color.argb(Color.red(starColor), Color.blue(starColor), Color.green(starColor), brightness));
+        paint.setColor(Color.argb(brightness, Color.red(starColor), Color.green(starColor), Color.blue(starColor)));
         canvas.drawCircle(x, y, size, paint);
     }
 
@@ -160,3 +170,4 @@ public class DrawSpace {
         return value + random.nextInt((int) (value * variance * 100)) / 100;
     }
 }
+
